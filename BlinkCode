@@ -1,0 +1,25 @@
+private void blink(){
+        final Handler handler = new Handler();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int timeToBlink =500;    //in milissegunds
+                try{Thread.sleep(timeToBlink);}catch (Exception e) {}
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        TextView boardA = (TextView) findViewById(R.id.board1);
+                        TextView boardB = (TextView) findViewById(R.id.board2);
+                        if(boardA.getVisibility() == View.VISIBLE && boardB.getVisibility()==View.VISIBLE){
+                            boardA.setVisibility(View.INVISIBLE);
+                            boardB.setVisibility(View.INVISIBLE);
+                        }else{
+                            boardA.setVisibility(View.VISIBLE);
+                            boardB.setVisibility(View.VISIBLE);
+                        }
+                        blink();
+                    }
+                });
+            }
+        }).start();
+    }
